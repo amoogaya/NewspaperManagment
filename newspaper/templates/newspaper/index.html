@@ -1,0 +1,27 @@
+{% extends "newspaper/base.html" %}
+
+{% block sub-title %} | Index{% endblock %}
+
+{% block content-main %}
+
+
+{% if authors %}
+
+
+<ul>
+    {% for q in authors %}
+    <li>
+        {% csrf_token %}
+        <a href=" {% url 'newspaper:detailed' q.id %} "> {{ q.first_name  }} {{ q.last_name }}</a>
+    </li>
+    </br>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+     <p> No Authors are available. </p>
+
+{% endif %}
+
+{% endblock %}

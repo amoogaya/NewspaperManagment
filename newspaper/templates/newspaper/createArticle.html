@@ -1,0 +1,16 @@
+{% extends "newspaper/base.html" %}
+
+{% block sub-title %} | Index{% endblock %}
+
+{% block content-main %}
+
+<div>
+    <h2> create An article </h2>
+    <form action="{% url 'newspaper:addArticle' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create">
+    </form>
+</div>
+
+{% endblock %}

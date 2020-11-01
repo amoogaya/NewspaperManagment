@@ -1,0 +1,31 @@
+<div id="topbar">
+
+    <div class="navbar">
+
+        <div class="navbar-content">
+
+            <div class="navbar-left">
+                {% csrf_token %}
+
+                <a class="navbar" href="{% url 'newspaper:index' %}">
+                    <b>Newspaper</b></a>
+                &middot;
+                <a class="navbar" href="{% url 'newspaper:addArticle' %} ">
+                    add Article </a>
+                &middot;
+                <a class="navbar" href="{% url 'accounts:login' %}">
+                    Login </a>
+                &middot;
+                <a class="navbar" href="{% url 'accounts:Signup' %}">
+                    Signup </a>
+                 &middot;
+                <a class="navbar" href=" {% url 'accounts:logout' %}">
+                    Logout </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
