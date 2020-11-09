@@ -3,7 +3,7 @@ from newspaper.models import Authors, OurUser
 from django.contrib.auth import login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-
+from django.contrib.auth.models import Permission
 
 # Create your views here.
 def signup_view(request):
@@ -11,23 +11,39 @@ def signup_view(request):
         form = UserForm(request.POST)
 
         if form.is_valid():
-            first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
-            username = request.POST.get('username')
-            resigt_as = request.POST.get('resigt_as')
-            password = request.POST.get('password')
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            username = form.cleaned_data['username']
+            register_as = form.cleaned_data['register_as']
+            password = form.cleaned_data['password1']
 
-            if resigt_as == 'Author':
+            if register_as == 'Author':
                 user = Authors.objects.create_user(first_name=first_name,
                                                    last_name=last_name,
                                                    username=username,
                                                    password=password,
-                                                   resigt_as=resigt_as)
+                                                   register_as=register_as,
+                                                   is_staff=True)
             else:
                 user = OurUser.objects.create_user(first_name=first_name,
                                                    last_name=last_name,
                                                    username=username,
-                                                   resigt_as=resigt_as)
+                                                   password=password,
+                                                   register_as=register_as,
+                                                   is_staff=False)
+
+            user.set_password(form.cleaned_data["password1"])
+
+            permission1 = Permission.objects.get(name='Can add articles', )
+            permission2 = Permission.objects.get(name='Can view articles', )
+            permission3 = Permission.objects.get(name='Can change articles', )
+            permission4 = Permission.objects.get(name='Can delete articles', )
+
+            user.user_permissions.add(permission1, permission2,permission3, permission4)
+
+
+
+            user.save()
             login(request, user)
 
             return redirect('newspaper:index')
@@ -55,6 +71,5 @@ def login_view(request):
 
 
 def logout_view(request):
-    if request.method == 'POST':
-        logout(request)
+    logout(request)
     return redirect('newspaper:index')

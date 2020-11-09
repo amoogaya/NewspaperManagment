@@ -8,28 +8,25 @@ from django.views import generic
 # Create your views here.
 
 class IndexView(generic.ListView):
+    model = Authors
     template_name = 'newspaper/index.html'
     context_object_name = 'authors'
 
-    def get_queryset(self):
-        return Authors.objects.all()
 
-
-class DetailedView(generic.DetailView):
+class AuthorsDetailedView(generic.DetailView):
     model = Authors
     template_name = 'newspaper/detail.html'
 
-    def get_queryset(self):
-        return Authors.objects.all()
 
-
-@login_required(login_url='/accounts/login')
+@login_required(login_url='/accounts/login', redirect_field_name='/newspaper/createArticle.html')
 def article_add(request):
+    print(True)
+    
     username = request.user.username
     print(username)
     the_user = MyUser.objects.get(username=username)
 
-    if the_user.resigt_as == 'Author':
+    if the_user.register_as == 'Author':
         if request.method == 'POST':
             form = forms.ArticlesForm(request.POST)
             if form.is_valid():

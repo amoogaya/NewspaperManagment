@@ -6,7 +6,7 @@
 
 <div>
     <h2> create An article </h2>
-    <form action="{% url 'newspaper:addArticle' %}" method="post">
+    <form action="{% url 'newspaper:add_article' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Create">
