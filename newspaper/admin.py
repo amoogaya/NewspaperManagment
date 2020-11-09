@@ -16,18 +16,22 @@ class AuthorsAdmin(admin.ModelAdmin):
 
 class ArticleAdmin(admin.ModelAdmin):
 
+    list_display = ('title', 'author', 'Category', 'is_published')
+    date_hierarchy = 'published_date'
+
+    def has_change_permission(self, request, obj=None):
+        if obj is not None:
+            if obj.author.username == request.user.username:
+                return True
+            else:
+                return False
+
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "author":
             kwargs["queryset"] = Authors.objects.filter(id=request.user.id)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
-    def get_changelist_formset(self, request, **kwargs):
-        if Articles.author == request.user.id:
-            kwargs['formset'] = " "
-        return super().get_changelist_formset(request, **kwargs)
 
-    list_display = ('title', 'author', 'Category', 'is_published')
-    date_hierarchy = 'published_date'
 
 
 # Register your models here.
