@@ -3,9 +3,12 @@ from .models import OurUser, Authors, MyUser, Articles
 
 
 class AuthorsAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'email')
+    empty_value_display = '-empty-'
+
     fieldsets = (
         ('None', {
-            'fields': ('first_name', 'last_name', 'username')
+            'fields': ('first_name', 'last_name', 'username', 'email')
         }),
         ('Advanced options', {
             'classes': ('collapse',),
@@ -18,6 +21,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
     list_display = ('title', 'author', 'Category', 'is_published')
     date_hierarchy = 'published_date'
+    empty_value_display = 'empty'
 
     def has_change_permission(self, request, obj=None):
         if obj is not None:
@@ -36,6 +40,6 @@ class ArticleAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(MyUser)
-admin.site.register(Authors)
+admin.site.register(Authors, AuthorsAdmin)
 admin.site.register(OurUser)
 admin.site.register(Articles, ArticleAdmin)
