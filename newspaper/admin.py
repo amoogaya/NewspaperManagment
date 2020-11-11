@@ -1,8 +1,5 @@
 from django.contrib import admin
-import datetime
-
 from .models import OurUser, Authors, MyUser, Articles, ArticleImages
-from django.db import models
 
 
 class AuthorsAdmin(admin.ModelAdmin):
@@ -22,22 +19,17 @@ class AuthorsAdmin(admin.ModelAdmin):
 
 class ArticleImagesAdmin(admin.StackedInline):
     model = ArticleImages
-    fields = ('image_view', )
     readonly_fields = ('image_view',)
-
+    fields = ('image_view', )
     extra = 3
-    initial = [
-        {'Images': 'upload7/download_1.jpg', }
-    ]
     max_num = 5
 
-class ArticleAdmin(admin.ModelAdmin):
 
+class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'Category', 'is_published',)
     date_hierarchy = 'published_date'
     empty_value_display = 'empty'
     inlines = [ArticleImagesAdmin]
-
 
     def has_change_permission(self, request, obj=None):
         if obj is not None:
@@ -57,8 +49,6 @@ class ArticleAdmin(admin.ModelAdmin):
         if db_field.name == "author":
             kwargs["queryset"] = Authors.objects.filter(id=request.user.id)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
-
 
 
 # Register your models here.

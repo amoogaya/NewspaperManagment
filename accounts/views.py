@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import Permission
 
+
 # Create your views here.
 def signup_view(request):
     if request.method == 'POST':
@@ -38,10 +39,7 @@ def signup_view(request):
             permission2 = Permission.objects.get(name='Can view articles', )
             permission3 = Permission.objects.get(name='Can change articles', )
             permission4 = Permission.objects.get(name='Can delete articles', )
-
-            user.user_permissions.add(permission1, permission2,permission3, permission4)
-
-
+            user.user_permissions.add(permission1, permission2, permission3, permission4)
 
             user.save()
             login(request, user)

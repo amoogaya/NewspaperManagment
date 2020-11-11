@@ -64,7 +64,7 @@ class ArticleImages(models.Model):
     articles = models.ForeignKey(Articles, on_delete=models.CASCADE)
 
     def images_view(self):
-        return u'<img src="%s" />' % escape(self.image.url_125x125)
+        return u'<img src="%s" />' % escape(self.images)
 
     images_view.short_description = 'Image'
     images_view.allow_tags = True
