@@ -1,31 +1,41 @@
-<div id="topbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Newspaper</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="navbar">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <div class="navbar-content">
+        <div id="topbar">
 
-            <div class="navbar-left">
-                {% csrf_token %}
+        <div class="navbar">
 
-                <a class="navbar" href="{% url 'newspaper:index' %}">
-                    <b>Newspaper</b></a>
-                &middot;
-                <a class="navbar" href="{% url 'newspaper:add_article' %} ">
-                    add Article </a>
-                &middot;
-                <a class="navbar" href="{% url 'accounts:login' %}">
-                    Login </a>
-                &middot;
-                <a class="navbar" href="{% url 'accounts:Signup' %}">
-                    Signup </a>
-                 &middot;
-                <a class="navbar" href=" {% url 'accounts:logout' %}">
-                    Logout </a>
+             <div class="navbar-content">
 
-            </div>
+                <div class="navbar-nav mr-auto">
+
+                     <a class="navbar" href="{% url 'newspaper:index' %}">
+                         <b>Newspaper</b></a>
+
+                     <a class="navbar" href="{% url 'newspaper:add_article' %} ">
+                         add Article </a>
+
+                     <a class="navbar" href="{% url 'accounts:login' %}">
+                        Login </a>
+
+                     <a class="navbar" href="{% url 'accounts:Signup' %}">
+                         Signup </a>
+
+                     <a class="navbar" href=" {% url 'accounts:logout' %}">
+                         Logout </a>
+                    <br>
+                </div>
+
+             </div>
 
         </div>
 
-    </div>
+      </div>
 
-</div>
+    </div>
+</nav>

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.utils.html import escape
 # Create your models here.
 
 
@@ -56,3 +56,15 @@ class Articles(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ArticleImages(models.Model):
+
+    images = models.ImageField(upload_to='upload7/')
+    articles = models.ForeignKey(Articles, on_delete=models.CASCADE)
+
+    def images_view(self):
+        return u'<img src="%s" />' % escape(self.image.url_125x125)
+
+    images_view.short_description = 'Image'
+    images_view.allow_tags = True
