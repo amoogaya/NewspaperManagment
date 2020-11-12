@@ -60,11 +60,17 @@ class Articles(models.Model):
 
 class ArticleImages(models.Model):
 
-    images = models.ImageField(upload_to='upload7/')
+    images = models.ImageField(upload_to='upload/')
     articles = models.ForeignKey(Articles, on_delete=models.CASCADE)
 
     def images_view(self):
-        return u'<img src="%s" />' % escape(self.images)
+        return u'<img src="%s" />' % escape(self.images.upload_to)
 
     images_view.short_description = 'Image'
     images_view.allow_tags = True
+
+    def image_tag(self, obj):
+        return u'<img src="%s" />' % obj.image
+
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags = True

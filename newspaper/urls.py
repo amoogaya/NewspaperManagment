@@ -10,6 +10,5 @@ urlpatterns = [
     path('', view=views.IndexView.as_view(), name='index'),
     path('<int:pk>/', view=views.AuthorsDetailedView.as_view(), name='detailed'),
     path('add/', views.article_add, name='add_article'),
-
-
+    path('test/', views.test_form_set, name='test_form'),
 ]

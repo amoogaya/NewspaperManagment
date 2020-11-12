@@ -19,13 +19,14 @@ class AuthorsAdmin(admin.ModelAdmin):
 
 class ArticleImagesAdmin(admin.StackedInline):
     model = ArticleImages
-    readonly_fields = ('image_view',)
-    fields = ('image_view', )
+    #fields = ('image_view',)
+    #readonly_fields = ('image_view',)
     extra = 3
     max_num = 5
 
 
 class ArticleAdmin(admin.ModelAdmin):
+
     list_display = ('title', 'author', 'Category', 'is_published',)
     date_hierarchy = 'published_date'
     empty_value_display = 'empty'
