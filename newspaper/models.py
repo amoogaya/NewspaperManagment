@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.html import escape, format_html
 
-
 # Create your models here.
 class MyUser(AbstractUser):
     roles = (

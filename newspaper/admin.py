@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import OurUser, Authors, MyUser, Articles, ArticleImages
+from djrichtextfield.models import RichTextWidget
+from django.db import models
 
 
 class AuthorsAdmin(admin.ModelAdmin):
@@ -33,7 +35,9 @@ class ArticleAdmin(admin.ModelAdmin):
     date_hierarchy = 'published_date'
     empty_value_display = 'empty'
     inlines = [ArticleImagesAdmin]
-
+    formfield_overrides = {
+        models.TextField: {'widget': RichTextWidget},
+    }
     def has_change_permission(self, request, obj=None):
         if obj is not None:
             if obj.author.username == request.user.username:

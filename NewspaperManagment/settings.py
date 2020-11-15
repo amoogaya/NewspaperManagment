@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -25,7 +24,6 @@ SECRET_KEY = '6&j(&vnw+qu_%=#cmj4&pxy7@mm%0t51gh_)9_@99!x2si6-cy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -38,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'newspaper.apps.NewspaperConfig',
     'accounts.apps.AccountsConfig',
+    'djrichtextfield',
+
 ]
 
 MIDDLEWARE = [
@@ -51,6 +51,35 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'NewspaperManagment.urls'
+
+DJRICHTEXTFIELD_CONFIG = {
+    'js': ['//cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js'],
+
+    'css': {
+        # 'all': [
+        #   'https://cdn.example.com/css/editor.css'
+        # ]
+    },
+
+    'init_template': 'djrichtextfield/init/tinymce.js',
+    'settings': {  # TinyMCE
+        'menubar': False,
+        'plugins': 'link image table code',
+        'toolbar': 'bold italic | link image | removeformat |formatselect | table ',
+        'width': 700
+    },
+    'profiles': {
+        'basic': {
+            'toolbar': 'bold italic | removeformat'
+        },
+        'advanced': {
+            'plugins': 'link image table code',
+            'toolbar': 'format select | bold italic | removeformat |'
+                       ' link unlink image table | code'
+        },
+    }
+
+}
 
 TEMPLATES = [
     {
@@ -70,7 +99,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'NewspaperManagment.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -80,7 +108,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -100,7 +127,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -115,7 +141,6 @@ USE_L10N = True
 USE_TZ = True
 
 AUTH_USER_MODEL = 'newspaper.MyUser'
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
