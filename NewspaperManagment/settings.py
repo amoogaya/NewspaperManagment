@@ -24,7 +24,6 @@ SECRET_KEY = '6&j(&vnw+qu_%=#cmj4&pxy7@mm%0t51gh_)9_@99!x2si6-cy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -39,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'newspaper.apps.NewspaperConfig',
     'accounts.apps.AccountsConfig',
-
-
 ]
 
 MIDDLEWARE = [

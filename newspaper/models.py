@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.utils.html import escape
+from django.utils.html import escape, format_html
+
+
 # Create your models here.
-
-
 class MyUser(AbstractUser):
     roles = (
              ('User', 'User'),
@@ -47,7 +47,7 @@ class Articles(models.Model):
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     published_date = models.DateTimeField(auto_now_add=True)
-    Category = models.CharField(max_length=10, choices=category_choices)
+    category = models.CharField(max_length=10, choices=category_choices)
     body = models.TextField(default='')
     is_published = models.BooleanField(default=False)
 
@@ -60,17 +60,11 @@ class Articles(models.Model):
 
 class ArticleImages(models.Model):
 
-    images = models.ImageField(upload_to='upload/')
+    images = models.ImageField(upload_to='static/')
     articles = models.ForeignKey(Articles, on_delete=models.CASCADE)
 
-    def images_view(self):
-        return u'<img src="%s" />' % escape(self.images.upload_to)
+    def get_image_element(self):
+        return format_html('<img src="%s" />' % escape(self.images.url))
 
-    images_view.short_description = 'Image'
-    images_view.allow_tags = True
-
-    def image_tag(self, obj):
-        return u'<img src="%s" />' % obj.image
-
-    image_tag.short_description = 'Image'
-    image_tag.allow_tags = True
+    get_image_element.short_description = 'Image'
+    get_image_element.allow_tags = True

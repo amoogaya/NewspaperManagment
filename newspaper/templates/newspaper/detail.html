@@ -15,7 +15,7 @@
        {% for article in object.articles_set.all %}
            <label for="choice{{ forloop.counter }}">{{article.title}}</label>
            <br>
-           <label for="choice{{ forloop.counter }}">{{article.Category}}</label>
+           <label for="choice{{ forloop.counter }}">{{article.category}}</label>
            <br>
            <label for="choice{{ forloop.counter }}">{{article.body}}</label>
            <br>
