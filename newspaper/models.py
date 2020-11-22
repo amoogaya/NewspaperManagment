@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.html import escape, format_html
 
+
 # Create your models here.
 class MyUser(AbstractUser):
     roles = (
@@ -17,7 +18,6 @@ class MyUser(AbstractUser):
     email = models.EmailField(blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField()
-
     register_as = models.CharField(max_length=200, choices=roles)
     REQUIRED_FIELDS = ['register_as']
 
@@ -27,7 +27,7 @@ class OurUser(MyUser):
         verbose_name = 'our_user'
 
 
-class Authors(MyUser):
+class Author(MyUser):
     position = models.CharField(max_length=200, blank=True)
 
     class Meta:
@@ -37,15 +37,15 @@ class Authors(MyUser):
         return self.first_name + self.last_name
 
 
-class Articles(models.Model):
+class Article(models.Model):
     category_choices = (
         ('sport', 'sport'),
         ('history', 'historical'),
         ('tourism', 'tourism'),
       )
-    author = models.ForeignKey(Authors, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    published_date = models.DateTimeField(auto_now_add=True)
+    published_date = models.DateTimeField()
     category = models.CharField(max_length=10, choices=category_choices)
     body = models.TextField(default='')
     is_published = models.BooleanField(default=False)
@@ -59,11 +59,11 @@ class Articles(models.Model):
 
 class ArticleImages(models.Model):
 
-    images = models.ImageField(upload_to='static/')
-    articles = models.ForeignKey(Articles, on_delete=models.CASCADE)
+    image = models.ImageField()
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
     def get_image_element(self):
-        return format_html('<img src="%s" />' % escape(self.images.url))
+        return format_html('<img src="%s" />' % escape(self.image.url))
 
     get_image_element.short_description = 'Image'
     get_image_element.allow_tags = True

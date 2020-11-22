@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -52,33 +52,54 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'NewspaperManagment.urls'
 
+# DJRICHTEXTFIELD_CONFIG = {
+#     'js': ['//cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js'],
+#
+#     'css': {
+#         # 'all': [
+#         #   'https://cdn.example.com/css/editor.css'
+#         # ]
+#     },
+#
+#     'init_template': 'djrichtextfield/init/tinymce.js',
+#     'settings': {  # TinyMCE
+#         'menubar': False,
+#         'plugins': 'link image table code',
+#         'toolbar': 'bold italic | link image | removeformat |formatselect | table ',
+#         'width': 700
+#     },
+#     'profiles': {
+#         'basic': {
+#             'toolbar': 'bold italic | removeformat'
+#         },
+#         'advanced': {
+#             'plugins': 'link image table code',
+#             'toolbar': 'format select | bold italic | removeformat |'
+#                        ' link unlink image table | code'
+#         },
+#     }
+#
+# }
+
 DJRICHTEXTFIELD_CONFIG = {
-    'js': ['//cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js'],
-
+    'js': [
+        '//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js',
+        '//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js',
+    ],
     'css': {
-        # 'all': [
-        #   'https://cdn.example.com/css/editor.css'
-        # ]
+        'all': [
+            '//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css',
+        ]
     },
-
-    'init_template': 'djrichtextfield/init/tinymce.js',
-    'settings': {  # TinyMCE
-        'menubar': False,
-        'plugins': 'link image table code',
-        'toolbar': 'bold italic | link image | removeformat |formatselect | table ',
-        'width': 700
-    },
-    'profiles': {
-        'basic': {
-            'toolbar': 'bold italic | removeformat'
-        },
-        'advanced': {
-            'plugins': 'link image table code',
-            'toolbar': 'format select | bold italic | removeformat |'
-                       ' link unlink image table | code'
-        },
+    'init_template': 'rich_text/summernote_init.js',
+    'settings': {
+        'followingToolbar': False,
+        'minHeight': 250,
+        'width': 700,
+        'toolbar': [
+            ['style', ['bold', 'italic', 'clear']],
+        ],
     }
-
 }
 
 TEMPLATES = [
@@ -146,3 +167,4 @@ AUTH_USER_MODEL = 'newspaper.MyUser'
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/')

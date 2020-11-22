@@ -8,7 +8,8 @@ app_name='newspaper'
 
 urlpatterns = [
     path('', view=views.IndexView.as_view(), name='index'),
-    path('<int:pk>/', view=views.AuthorsDetailedView.as_view(), name='detailed'),
+    path('<int:pk>/', view=views.AuthorDetailedView.as_view(), name='detailed'),
     path('add/', views.article_add, name='add_article'),
+    path('widget/', views.widget_employ, name='widget_employ'),
     path('test/', views.test_form_set, name='test_form'),
 ]

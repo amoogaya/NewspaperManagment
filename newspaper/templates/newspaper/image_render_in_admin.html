@@ -1,0 +1,45 @@
+{% if widget.is_initial %}
+
+<p class="file-upload">
+
+    {{ widget.initial_text }}: <a href="{{ widget.value.url }}">{{ widget.value }}</a>
+
+    {% if not widget.required %}
+       <span class="clearable-file-input">
+           <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}"
+              {% if widget.attrs.disabled %}
+                  disabled
+              {% endif %}>
+           <label for="{{ widget.checkbox_id }}">{{ widget.clear_checkbox_label }}</label>
+       </span>
+    {% endif %}
+    <br>
+
+     {{ widget.input_text }}:
+
+    {% endif %}
+{% if not widget.is_initial %}
+
+  <input id="{{ widget.name }}" type="{{ widget.type }}" name="{{ widget.name }}" onchange="readURL(this)">
+{% endif %}
+
+    {% if widget.is_initial %}
+
+{% endif %}
+
+</p>
+
+<script>
+function readURL(input_image) {
+        if (input_image.files && input_image.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            var img1 = $("<img>").attr('src', e.target.result)
+                                 .width(300)
+                                 .height(200);
+            $(input_image).after(img1);
+            };
+            reader.readAsDataURL(input_image.files[0]);
+        }
+    }
+</script>

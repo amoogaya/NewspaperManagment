@@ -1,10 +1,11 @@
-from django.contrib import admin
-from .models import OurUser, Authors, MyUser, Articles, ArticleImages
-from djrichtextfield.models import RichTextWidget
 from django.db import models
+from django.contrib import admin
+from .widgets import ImageCustomWidget
+from djrichtextfield.models import RichTextWidget
+from .models import OurUser, Author, MyUser, Article, ArticleImages
 
 
-class AuthorsAdmin(admin.ModelAdmin):
+class AuthorAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'email')
 
     fieldsets = (
@@ -18,26 +19,31 @@ class AuthorsAdmin(admin.ModelAdmin):
     )
 
 
-class ArticleImagesAdmin(admin.StackedInline):
+class ArticleImageAdmin(admin.StackedInline):
     model = ArticleImages
     extra = 3
     max_num = 5
+    fields = ('image', )
+    formfield_overrides = {
+        models.ImageField: {'widget': ImageCustomWidget},
+    }
 
 
-class ImagesAdmin(admin.ModelAdmin):
+class ImageAdmin(admin.ModelAdmin):
     model = ArticleImages
     list_display = ('get_image_element', )
-    fields = ('images', 'articles', )
+    fields = ('image', 'article', )
 
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'category', 'is_published', 'body')
+    fields = ('title', 'author', 'category', 'published_date', 'body')
     date_hierarchy = 'published_date'
-    empty_value_display = 'empty'
-    inlines = [ArticleImagesAdmin]
+    inlines = [ArticleImageAdmin]
     formfield_overrides = {
         models.TextField: {'widget': RichTextWidget},
     }
+
     def has_change_permission(self, request, obj=None):
         if obj is not None:
             if obj.author.username == request.user.username:
@@ -54,15 +60,12 @@ class ArticleAdmin(admin.ModelAdmin):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "author":
-            kwargs["queryset"] = Authors.objects.filter(id=request.user.id)
+            kwargs["queryset"] = Author.objects.filter(id=request.user.id)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 # Register your models here.
 admin.site.register(MyUser)
-admin.site.register(Authors, AuthorsAdmin)
+admin.site.register(Author, AuthorAdmin)
 admin.site.register(OurUser)
-admin.site.register(Articles, ArticleAdmin)
-admin.site.register(ArticleImages, ImagesAdmin)
-
-
+admin.site.register(Article, ArticleAdmin)

@@ -1,0 +1,16 @@
+{% extends "newspaper/base.html" %}
+
+{% block sub-title %} | Index{% endblock %}
+
+{% block content-main %}
+
+<div>
+    <h2> employ the different widgets  </h2>
+        <form action="{% url 'newspaper:widget_employ' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Create">
+    </form>
+</div>
+
+{% endblock %}
