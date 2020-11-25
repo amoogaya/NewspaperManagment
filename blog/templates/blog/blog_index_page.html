@@ -14,9 +14,12 @@
         {{ page.intro|richtext }}
     </div>
 
-    {%for blog in page.get_children%}
-        <h3><a href="{% pageurl blog %}"> {{ blog.title }} </a></h3>
-        {{page.specific.date}}
+    {%for blog in blog_entries %}
+        <h3> {{ blog.title }} </a></h3>
+        {{blog.specific.date}}
+        <img src="blog.specific.feed_image.get_rendition(">
+        <p>  ** ----------------------------------------------------------- **  </p>
+        <br>
     {% endfor %}
 
 {% endblock %}
