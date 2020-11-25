@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+
+    <h1 style="color:#45DF45">
+        {{page.title}}
+    </h1>
+
+    <div style="color:green">
+        {{ page.intro|richtext }}
+    </div>
+
+    {%for blog in page.get_children%}
+        <h3><a href="{% pageurl blog %}"> {{ blog.title }} </a></h3>
+        {{page.specific.date}}
+    {% endfor %}
+
+{% endblock %}
+

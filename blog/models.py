@@ -7,6 +7,16 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
 
+class BlogIndexPage(Page):
+    intro = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro', classname='full')
+    ]
+
+    subpage_types = ['blog.BlogPage']
+
+
 class BlogPage(Page):
     body = RichTextField()
     date = models.DateField(" Post date ")
@@ -33,4 +43,5 @@ class BlogPage(Page):
         ImageChooserPanel('feed_image'),
     ]
 
+    parent_page_types = ['blog.BlogIndexPage',]
     subpage_types = []
