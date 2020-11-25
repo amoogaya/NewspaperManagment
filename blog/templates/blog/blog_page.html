@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+
+    {{page.title}}
+    <div style="color:green">
+        {{ page.body|richtext }}
+    </div>
+    {{page.date}}
+    {{feed_images}}
+
+{% endblock %}
+
+
+

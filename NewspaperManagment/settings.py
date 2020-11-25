@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newspaper.apps.NewspaperConfig',
+
     'accounts.apps.AccountsConfig',
     'djrichtextfield',
 
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
 
+    'blog',
 ]
 
 MIDDLEWARE = [
