@@ -1,10 +1,12 @@
 {% extends "blog/base.html" %}
 
 {% load wagtailcore_tags %}
+{% load demo_tags %}
 
-{% block body_class %}template-blogpage{% endblock %}
+{% block body_class %} template-blogpage {% endblock %}
 
 {% block content %}
+
 
     <h1 style="color:#45DF45">
         {{page.title}}
@@ -15,12 +17,13 @@
     </div>
 
     {%for blog in blog_entries %}
-        <h3> {{ blog.title }} </a></h3>
+        <h3> {{ blog.title }} </h3>
         {{blog.specific.date}}
-        <img src="blog.specific.feed_image.get_rendition(">
         <p>  ** ----------------------------------------------------------- **  </p>
         <br>
     {% endfor %}
+
+    {% adverts %}
 
 {% endblock %}
 

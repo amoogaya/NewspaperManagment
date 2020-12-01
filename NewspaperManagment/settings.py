@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
+    'wagtail.contrib.search_promotions',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',
@@ -71,34 +72,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'NewspaperManagment.urls'
 
-# DJRICHTEXTFIELD_CONFIG = {
-#     'js': ['//cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js'],
-#
-#     'css': {
-#         # 'all': [
-#         #   'https://cdn.example.com/css/editor.css'
-#         # ]
-#     },
-#
-#     'init_template': 'djrichtextfield/init/tinymce.js',
-#     'settings': {  # TinyMCE
-#         'menubar': False,
-#         'plugins': 'link image table code',
-#         'toolbar': 'bold italic | link image | removeformat |formatselect | table ',
-#         'width': 700
-#     },
-#     'profiles': {
-#         'basic': {
-#             'toolbar': 'bold italic | removeformat'
-#         },
-#         'advanced': {
-#             'plugins': 'link image table code',
-#             'toolbar': 'format select | bold italic | removeformat |'
-#                        ' link unlink image table | code'
-#         },
-#     }
-#
-# }
 
 DJRICHTEXTFIELD_CONFIG = {
     'js': [
@@ -182,13 +155,12 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'newspaper.MyUser'
 
+# wagtail settings
+
 WAGTAIL_SITE_NAME = 'My Example Site'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
+WAGTAILEMBEDS_RESPONSIVE_HTML = True
 STATIC_URL = '/static/'
-
 
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

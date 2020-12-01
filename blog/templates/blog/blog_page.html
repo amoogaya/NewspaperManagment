@@ -1,6 +1,9 @@
 {% extends "blog/base.html" %}
 
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load wagtailuserbar %}
+
 
 {% block body_class %}template-blogpage{% endblock %}
 
@@ -11,9 +14,27 @@
         {{ page.body|richtext }}
     </div>
     {{page.date}}
-    {{feed_images}}
+
+    {% wagtailuserbar 'top-right' %}
+
+
+    {% image page.feed_image width-550 format-webp as webp_image %}
+    {% image page.feed_image width-550 format-jpeg as jpeg_image %}
+
+     <amp-img
+        alt="{{ image.alt }}"
+        width="{{ webp_image.width }}"
+        height="{{ webp_image.height }}"
+        src="{{ webp_image.url }}">
+        <amp-img alt="{{ image.alt }}"
+        fallback
+        width="{{ jpeg_image.width }}"
+        height="{{ jpeg_image.height }}"
+        src="{{ jpeg_image.url }}">
+        </amp-img>
+
+     </amp-img>
+
+    {{page.advert}}
 
 {% endblock %}
-
-
-
