@@ -1,29 +1,32 @@
 {% extends "blog/base.html" %}
 
+{% load i18n %}
 {% load wagtailcore_tags %}
 {% load demo_tags %}
+
 
 {% block body_class %} template-blogpage {% endblock %}
 
 {% block content %}
 
+    {% trans "Let's translate this" %}
+        <h1 style="color:#45DF45">
+            {{page.title}}
+        </h1>
 
-    <h1 style="color:#45DF45">
-        {{page.title}}
-    </h1>
+        <div style="color:green">
+            {{ page.intro|richtext }}
+        </div>
 
-    <div style="color:green">
-        {{ page.intro|richtext }}
-    </div>
+        {%for blog in blog_entries %}
+            <h3> {{ blog.title }} </h3>
+            {{blog.specific.date}}
+            <br>
+            <p> ** ----------------------------------------------------------- ** </p>
+            <br>
+        {% endfor %}
 
-    {%for blog in blog_entries %}
-        <h3> {{ blog.title }} </h3>
-        {{blog.specific.date}}
-        <p>  ** ----------------------------------------------------------- **  </p>
-        <br>
-    {% endfor %}
-
-    {% adverts %}
+         {% adverts %}
 
 {% endblock %}
 

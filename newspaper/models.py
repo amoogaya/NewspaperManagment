@@ -45,7 +45,7 @@ class Article(models.Model):
       )
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    published_date = models.DateTimeField()
+    published_date = models.DateTimeField(auto_now=True)
     category = models.CharField(max_length=10, choices=category_choices)
     body = models.TextField(default='')
     is_published = models.BooleanField(default=False)

@@ -20,9 +20,13 @@ from django.conf.urls.static import static
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
-
+from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import gettext_lazy as _
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
+]
+urlpatterns += i18n_patterns(
+    path(_('admin/'), admin.site.urls),
     path('djrichtextfield/', include('djrichtextfield.urls')),
     path('newspaper/', include('newspaper.urls')),
     path('accounts/', include('accounts.urls')),
@@ -30,6 +34,5 @@ urlpatterns = [
     path('documents/', include(wagtaildocs_urls)),
     path('pages/', include(wagtail_urls)),
     path('blog/', include('blog.urls')),
-
-]
+)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

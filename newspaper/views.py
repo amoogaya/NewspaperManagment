@@ -7,6 +7,7 @@ from django.forms import formset_factory, BaseFormSet
 from newspaper.forms import ArticleForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import gettext as _
 
 
 # Create your views here.
@@ -24,7 +25,6 @@ class AuthorDetailedView(generic.DetailView):
 @login_required(login_url='/accounts/login', redirect_field_name='/newspaper/createArticle.html')
 def article_add(request):
     username = request.user.username
-    print(username)
     the_user = MyUser.objects.get(username=username)
 
     if the_user.register_as == 'Author':
