@@ -3,7 +3,8 @@ from django.contrib import admin
 from .widgets import ImageCustomWidget
 from djrichtextfield.models import RichTextWidget
 from .models import OurUser, Author, MyUser, Article, ArticleImages
-
+from translated_fields import TranslatedFieldAdmin
+from django.utils.translation import gettext_lazy as _
 
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'email')
@@ -35,9 +36,9 @@ class ImageAdmin(admin.ModelAdmin):
     fields = ('image', 'article', )
 
 
-class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'category', 'is_published', 'body')
-    fields = ('title', 'author', 'category', 'published_date', 'body')
+class ArticleAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
+    list_display = ('title_ar', 'author_ar', 'category_ar', 'is_published_ar', 'body_ar', 'description_ar')
+    fields = ('title_ar', 'author_ar', 'category_ar', 'body_ar')
     date_hierarchy = 'published_date'
     inlines = [ArticleImageAdmin]
     formfield_overrides = {
