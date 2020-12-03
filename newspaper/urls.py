@@ -4,7 +4,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-app_name='newspaper'
+app_name = 'newspaper'
 
 urlpatterns = [
     path('', view=views.IndexView.as_view(), name='index'),

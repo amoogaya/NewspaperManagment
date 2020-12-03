@@ -13,14 +13,14 @@ class MyUser(AbstractUser):
     )
 
     id = models.AutoField(primary_key=True)
-    first_name = models.CharField(_('first name'), max_length=200, blank=True)
-    last_name = models.CharField(max_length=200, blank=True)
-    username = models.CharField(max_length=150, unique=True)
-    password = models.CharField(max_length=150)
-    email = models.EmailField(blank=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField()
-    register_as = models.CharField(max_length=200, choices=roles)
+    first_name = models.CharField(verbose_name=_('first name'), max_length=200, blank=True)
+    last_name = models.CharField(verbose_name=_('last_name'), max_length=200, blank=True)
+    username = models.CharField(verbose_name=_('username'), max_length=150, unique=True)
+    password = models.CharField(verbose_name=_('password'), max_length=150)
+    email = models.EmailField(verbose_name=_('email'), blank=True)
+    is_active = models.BooleanField(verbose_name=_('is_active'), default=True)
+    is_staff = models.BooleanField(verbose_name=_('is_staff'))
+    register_as = models.CharField(verbose_name=_('register_as'), max_length=200, choices=roles)
     REQUIRED_FIELDS = ['register_as']
 
 
@@ -31,7 +31,7 @@ class OurUser(MyUser):
 
 
 class Author(MyUser):
-    position = models.CharField(max_length=200, blank=True)
+    position = models.CharField(verbose_name=_('position'), max_length=200, blank=True)
     position_en = models.CharField(max_length=200, blank=True)
     position_ar = models.CharField(max_length=200, blank=True)
 
@@ -58,13 +58,13 @@ class Article(models.Model):
         ('tourism', _('tourism')),
       )
 
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    published_date = models.DateTimeField(auto_now=True)
-    category = models.CharField(max_length=10, choices=category_choices)
-    body = models.TextField(default='')
-    is_published = models.BooleanField(default=False)
-    description = models.CharField(max_length=200, null=True)
+    author = models.ForeignKey(Author, verbose_name=_('author'),  on_delete=models.CASCADE)
+    title = models.CharField(verbose_name=_('title'), max_length=200)
+    published_date = models.DateTimeField(verbose_name=_('published_date'), auto_now=True)
+    category = models.CharField(verbose_name=_('category'), max_length=10, choices=category_choices)
+    body = models.TextField(verbose_name=_('body'), default='')
+    is_published = models.BooleanField(verbose_name=_('is_published'), default=False)
+    description = models.CharField(verbose_name=_('description'), max_length=200, null=True)
 
     class Meta:
         verbose_name = _('article')
@@ -76,8 +76,8 @@ class Article(models.Model):
 
 
 class ArticleImages(models.Model):
-    image = models.ImageField()
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    image = models.ImageField(verbose_name=_('image'),)
+    article = models.ForeignKey(Article, verbose_name=_('article'), on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('articles image')
@@ -91,8 +91,8 @@ class ArticleImages(models.Model):
 
 
 class News(models.Model):
-    title = models.CharField(max_length=255)
-    text = models.TextField()
+    title = models.CharField(verbose_name=_('title'), max_length=255)
+    text = models.TextField(verbose_name=_('text'),)
 
     @property
     def get_title(self):
