@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -35,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'newspaper.apps.NewspaperConfig',
-
     'accounts.apps.AccountsConfig',
+
     'djrichtextfield',
 
     'wagtail.contrib.forms',
@@ -56,7 +59,6 @@ INSTALLED_APPS = [
     'taggit',
 
     'blog',
-    'parler',
 ]
 
 MIDDLEWARE = [
@@ -145,7 +147,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+PARLER_DEFAULT_LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -160,8 +164,8 @@ LOCALE_PATHS = [
 ]
 
 LANGUAGES = [
-    ('en', 'English'),
-    ('ar', 'Arabic')
+    ('en', _('English')),
+    ('ar', _('Arabic'))
 ]
 
 AUTH_USER_MODEL = 'newspaper.MyUser'

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-02 10:41+0200\n"
+"POT-Creation-Date: 2020-12-02 16:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
+#: NewspaperManagment/settings.py:165
+msgid "English"
+msgstr "الانجليزية"
+
+#: NewspaperManagment/settings.py:166
+msgid "Arabic"
+msgstr "العربية"
+
 #: NewspaperManagment/urls.py:29
 msgid "admin/"
 msgstr "admin/"
@@ -27,41 +35,57 @@ msgstr "admin/"
 msgid "Let's translate this"
 msgstr ""
 
-#: newspaper/models.py:15
+#: newspaper/models.py:16
 msgid "first name"
 msgstr " الاسم الأول "
 
-#: newspaper/models.py:28
+#: newspaper/models.py:29
 msgid "our user"
 msgstr "المستخدم الخاص بنا"
 
-#: newspaper/models.py:29
+#: newspaper/models.py:30
 msgid "our users"
 msgstr "المستخدمين الخاصين بنا "
 
-#: newspaper/models.py:36
+#: newspaper/models.py:37
 msgid "author"
 msgstr "المؤلف"
 
-#: newspaper/models.py:37
+#: newspaper/models.py:38
 msgid "authors"
 msgstr "المؤلفون"
 
-#: newspaper/models.py:57
+#: newspaper/models.py:46
+msgid "sport"
+msgstr "رياضة"
+
+#: newspaper/models.py:47
+msgid "history"
+msgstr "تاريخ"
+
+#: newspaper/models.py:48
+msgid "tourism"
+msgstr "سياحة"
+
+#: newspaper/models.py:60
 msgid "article"
 msgstr "المقالة"
 
-#: newspaper/models.py:58
+#: newspaper/models.py:61
 msgid "articles"
 msgstr "المقالات"
 
-#: newspaper/models.py:71
+#: newspaper/models.py:74
 msgid "articles image"
 msgstr "صورة المقالة"
 
-#: newspaper/models.py:72
+#: newspaper/models.py:75
 msgid "articles images"
 msgstr "صور المقالات"
+
+#: newspaper/models.py:86
+msgid "title"
+msgstr "العنوان"
 
 #: newspaper/templates/newspaper/index.html:8
 msgid " the list of our authors "

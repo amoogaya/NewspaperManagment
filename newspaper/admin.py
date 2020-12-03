@@ -2,16 +2,17 @@ from django.db import models
 from django.contrib import admin
 from .widgets import ImageCustomWidget
 from djrichtextfield.models import RichTextWidget
-from .models import OurUser, Author, MyUser, Article, ArticleImages
+from .models import OurUser, Author, MyUser, Article, ArticleImages, News
 from translated_fields import TranslatedFieldAdmin
-from django.utils.translation import gettext_lazy as _
+from modeltranslation.admin import TranslationAdmin
+
 
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'email')
+    list_display = ('first_name', 'email', 'get_position')
 
     fieldsets = (
         ('None', {
-            'fields': ('first_name', 'last_name', 'username', 'email')
+            'fields': ('first_name', 'last_name', 'username', 'email', 'position_en', 'position_ar')
         }),
         ('Advanced options', {
             'classes': ('collapse',),
@@ -37,8 +38,8 @@ class ImageAdmin(admin.ModelAdmin):
 
 
 class ArticleAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
-    list_display = ('title_ar', 'author_ar', 'category_ar', 'is_published_ar', 'body_ar', 'description_ar')
-    fields = ('title_ar', 'author_ar', 'category_ar', 'body_ar')
+    list_display = ('title', 'author', 'category', 'is_published', 'body',)
+    fields = ('title', 'author', 'category', 'body')
     date_hierarchy = 'published_date'
     inlines = [ArticleImageAdmin]
     formfield_overrides = {
@@ -65,8 +66,13 @@ class ArticleAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
+class NewsAdmin(TranslationAdmin):
+    fields = ('title', 'text',)
+
+
 # Register your models here.
 admin.site.register(MyUser)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(OurUser)
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(News, TranslationAdmin)

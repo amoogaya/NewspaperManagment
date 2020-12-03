@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
 from django.utils import translation
 
+
 # Create your views here.
 class IndexView(generic.ListView):
     model = Author
