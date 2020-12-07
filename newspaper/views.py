@@ -1,14 +1,12 @@
-from datetime import datetime
 from . import forms
-from django import forms as dj_form
+from datetime import datetime
 from django.views import generic
 from .models import Author, MyUser
-from django.forms import formset_factory, BaseFormSet
+from django import forms as dj_form
 from newspaper.forms import ArticleForm
 from django.shortcuts import render, redirect
+from django.forms import formset_factory, BaseFormSet
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import gettext as _
-from django.utils import translation
 
 
 # Create your views here.

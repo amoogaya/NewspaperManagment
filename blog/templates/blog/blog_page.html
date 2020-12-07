@@ -4,6 +4,7 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 {% load wagtailuserbar %}
+{% load demo_tags %}
 
 
 {% block body_class %}template-blogpage{% endblock %}
@@ -11,10 +12,12 @@
 {% block content %}
 
     {{page.title}}
-    <div style="color:green">
-        {{ page.body|richtext }}
+    <div style="border-color: deeppink;border-style: solid">
+        {%include_block page.body%}
     </div>
-    {{page.date}}
+    <p>
+        {{page.date}}
+    </p>
 
     {% wagtailuserbar 'top-right' %}
 
@@ -22,20 +25,51 @@
     {% image page.feed_image width-550 format-webp as webp_image %}
     {% image page.feed_image width-550 format-jpeg as jpeg_image %}
 
-     <amp-img
-        alt="{{ image.alt }}"
-        width="{{ webp_image.width }}"
-        height="{{ webp_image.height }}"
-        src="{{ webp_image.url }}">
-        <amp-img alt="{{ image.alt }}"
-        fallback
-        width="{{ jpeg_image.width }}"
-        height="{{ jpeg_image.height }}"
-        src="{{ jpeg_image.url }}">
-        </amp-img>
+    <div style="border-color: coral; border-style: solid; background: darksalmon">
+        {% for block in page.additional_information %}
+            {% if block.block_type == 'category' %}
+                <p style="font-size: large; color: azure ">
+                    The category of blog is : {{ block.value }}
+                </p>
+                <br>
+            {% endif %}
 
-     </amp-img>
+            {% if block.block_type == 'blog_number'%}
+                <p style="font-size: large; color: azure ">
+                    The number of blog is : {{ block.value }}
+                </p>
+                <br>
+            {% endif %}
 
-    {{page.advert}}
+            {% if block.block_type == 'date'%}
+                <p style="font-size: medium; color: black ">
+                   {{ block.value }}
+                </p>
+                <br>
+            {% endif %}
+            {% if block.block_type == 'author'%}
+                <p style="font-size: large; color: azure ">
+                    <h2> Author information </h2>
+                   {% include_block block %}
+                </p>
+                <br>
+            {% endif %}
 
+        {% endfor %}
+    </div>
+
+     <div style="background-color:darkturquoise">
+
+         <h3 style="color: aliceblue">
+              ADVERTS :
+         </h3>
+
+         {% for advert_placement in page.advert_placements.all %}
+             <p>
+                 <a style="color: azure" href="advert_placement.advert.url">
+                     {{advert_placement.advert.text}}
+                 </a>
+             </p>
+         {% endfor %}
+     </div>
 {% endblock %}

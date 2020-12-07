@@ -1,0 +1,9 @@
+{% load wagtailimages_tags%}
+
+<div class="{{ classname }}" >
+    <h3>
+        {{ value.first_name }} {{ value.surname }}
+    </h3>
+    {% image value.photo width-400%}
+    {{value.biography}}
+</div>

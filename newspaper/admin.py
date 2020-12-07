@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib import admin
 from .widgets import ImageCustomWidget
 from djrichtextfield.models import RichTextWidget
-from .models import OurUser, Author, MyUser, Article, ArticleImages, News
 from translated_fields import TranslatedFieldAdmin
 from modeltranslation.admin import TranslationAdmin
+from .models import OurUser, Author, MyUser, Article, ArticleImages, News
 
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -70,9 +70,13 @@ class NewsAdmin(TranslationAdmin):
     fields = ('title', 'text',)
 
 
+class ArticleTranslation(ArticleAdmin, TranslationAdmin):
+    fields = ['title', 'author', 'category', 'body']
+
+
 # Register your models here.
 admin.site.register(MyUser)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(OurUser)
-admin.site.register(Article, ArticleAdmin)
+admin.site.register(Article, ArticleTranslation)
 admin.site.register(News, TranslationAdmin)

@@ -1,8 +1,6 @@
 from django.shortcuts import render
-
-from wagtail.search.utils import parse_query_string
-from wagtail.search.models import Query
 from wagtail.core.models import Page
+from wagtail.search.models import Query
 
 
 # Create your views here.

@@ -1,7 +1,6 @@
-from django.forms import ModelForm, Widget
+from django.forms import ModelForm
 from .models import Article, MyUser
 from django.contrib.auth.forms import UserCreationForm
-from django import forms
 
 
 class ArticleForm(ModelForm):
